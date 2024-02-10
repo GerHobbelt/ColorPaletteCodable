@@ -72,7 +72,20 @@ public extension PAL {
 			self.right = right
 		}
 
-		#if canImport(AppKit)
+        #if canImport(UIKit)
+        /// Create from UIEdgeInsets
+        public init(_ edgeInsets: UIEdgeInsets) {
+            self.top = edgeInsets.top
+            self.left = edgeInsets.left
+            self.bottom = edgeInsets.bottom
+            self.right = edgeInsets.right
+        }
+
+        /// Edge insets
+        @inlinable public var edgeInsets: UIEdgeInsets {
+            UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+        }
+        #elseif canImport(AppKit)
 		/// Create from NSEdgeInsets
 		public init(_ edgeInsets: NSEdgeInsets) {
 			self.top = edgeInsets.top
@@ -86,21 +99,6 @@ public extension PAL {
 			NSEdgeInsets(top: top, left: left, bottom: bottom, right: right)
 		}
 
-		#endif
-
-		#if canImport(UIKit)
-		/// Create from UIEdgeInsets
-		public init(_ edgeInsets: UIEdgeInsets) {
-			self.top = edgeInsets.top
-			self.left = edgeInsets.left
-			self.bottom = edgeInsets.bottom
-			self.right = edgeInsets.right
-		}
-
-		/// Edge insets
-		@inlinable public var edgeInsets: UIEdgeInsets {
-			UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
-		}
 		#endif
 	}
 }
