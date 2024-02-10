@@ -30,7 +30,7 @@ import Foundation
 
 #if os(macOS)
 import AppKit
-#elseif os(iOS) || os(tvOS) || os(watchOS)
+#elseif os(iOS) || os(visionOS) || os(tvOS) || os(watchOS)
 import UIKit
 #endif
 

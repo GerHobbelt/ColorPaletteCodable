@@ -26,7 +26,7 @@
 
 // Platform specific routines
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if os(macOS) || os(iOS) || os(visionOS) || os(tvOS) || os(watchOS)
 
 import CoreGraphics
 
@@ -103,7 +103,7 @@ public extension PAL.Gradient {
 	}
 }
 
-#elseif os(iOS) || os(tvOS) || os(watchOS)
+#elseif os(iOS) || os(visionOS) || os(tvOS) || os(watchOS)
 
 import UIKit
 

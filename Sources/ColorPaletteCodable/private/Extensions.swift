@@ -145,7 +145,7 @@ extension InputStream {
 extension Data {
 	/// Attempt to determine the string encoding contained within the data. Returns nil if encoding cannot be inferred
 	var stringEncoding: String.Encoding? {
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(visionOS) || os(macOS) || os(tvOS) || os(watchOS)
 		var nsString: NSString?
 		guard case let rawValue = NSString.stringEncoding(for: self, encodingOptions: nil, convertedString: &nsString, usedLossyConversion: nil), rawValue != 0 else { return nil }
 		return .init(rawValue: rawValue)

@@ -28,7 +28,7 @@ import Foundation
 
 #if os(macOS)
 import AppKit
-#elseif os(iOS) || os(tvOS) || os(watchOS)
+#elseif os(iOS) || os(visionOS) || os(tvOS) || os(watchOS)
 import UIKit
 #endif
 
@@ -44,7 +44,7 @@ public extension PAL.Color {
 		let c = NSColor(calibratedHue: h, saturation: s, brightness: b, alpha: a).cgColor
 		let cc = c.converted(to: PAL.ColorSpace.RGB.cgColorSpace, intent: .defaultIntent, options: nil) ?? c
 		try self.init(cgColor: cc, name: name, colorType: colorType)
-#elseif os(iOS) || os(tvOS) || os(watchOS)
+#elseif os(iOS) || os(visionOS) || os(tvOS) || os(watchOS)
 		// Use UIKit
 		let c = UIColor(hue: h, saturation: s, brightness: b, alpha: a).cgColor
 		try self.init(cgColor: c, name: name, colorType: colorType)
@@ -84,7 +84,7 @@ extension PAL.Color {
 			throw PAL.CommonError.unsupportedPaletteType
 		}
 		nsc.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
-#elseif os(iOS) || os(tvOS) || os(watchOS)
+#elseif os(iOS) || os(visionOS) || os(tvOS) || os(watchOS)
 		guard let cgColor = self.cgColor else {
 			throw PAL.CommonError.unsupportedPaletteType
 		}

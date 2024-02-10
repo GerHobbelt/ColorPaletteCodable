@@ -56,7 +56,7 @@ class ImageTests: XCTestCase {
 		XCTAssertEqual(image2.size, CGSize(width: 90, height: 30))
 	}
 
-#elseif os(iOS) || os(watchOS) || os(tvOS)
+#elseif os(iOS) || os(visionOS) || os(watchOS) || os(tvOS)
 
 	func testiOSImage() throws {
 		let image = try PAL.Image.Image(colors: display.colors, size: CGSize(width: 100, height: 25))

@@ -1,13 +1,13 @@
 @testable import ColorPaletteCodable
 import XCTest
 
-#if os(macOS) || os(iOS)
+#if os(macOS) || os(iOS) || os(visionOS)
 
 #if os(macOS)
 func CreatePasteboard(named name: String) -> NSPasteboard {
 	return NSPasteboard(name: NSPasteboard.Name(name))
 }
-#elseif os(iOS)
+#elseif os(iOS) || os(visionOS) 
 func CreatePasteboard(named name: String) -> UIPasteboard {
 	return UIPasteboard(name: UIPasteboard.Name(name), create: true)!
 }

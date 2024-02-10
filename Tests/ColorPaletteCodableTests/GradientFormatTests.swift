@@ -30,7 +30,7 @@ class GradientFormatTests: XCTestCase {
 		XCTAssertEqual("Skyline", gradient.name)
 		XCTAssertEqual(7, gradient.stops.count)
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if os(macOS) || os(iOS) || os(visionOS) || os(tvOS) || os(watchOS)
 		do {
 			let image = gradient.image(size: CGSize(width: 500, height: 25))
 			XCTAssertNotNil(image)
@@ -94,7 +94,7 @@ class GradientFormatTests: XCTestCase {
 			XCTAssertEqual("Tube Red", gradient.name)
 			XCTAssertEqual(10, gradient.stops.count)
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if os(macOS) || os(iOS) || os(visionOS) || os(tvOS) || os(watchOS)
 			do {
 				let image = gradient.image(size: CGSize(width: 500, height: 25))
 				XCTAssertNotNil(image)
@@ -114,7 +114,7 @@ class GradientFormatTests: XCTestCase {
 			XCTAssertEqual("colorcube", gradient.name)
 			XCTAssertEqual(64, gradient.stops.count)
 
-#if os(macOS) || os(iOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(visionOS) || os(tvOS)
 			do {
 				let image = gradient.image(size: CGSize(width: 500, height: 25))
 				XCTAssertNotNil(image)
@@ -154,7 +154,7 @@ class GradientFormatTests: XCTestCase {
 				]
 			)
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if os(macOS) || os(iOS) || os(visionOS) || os(tvOS) || os(watchOS)
 			do {
 				let image = gradient.image(size: CGSize(width: 500, height: 25))
 				XCTAssertNotNil(image)

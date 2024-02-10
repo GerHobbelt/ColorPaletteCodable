@@ -26,7 +26,7 @@
 
 // iOS, tvOS, watchOS related functions
 
-#if os(iOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(visionOS) || os(tvOS) || os(watchOS)
 
 import Foundation
 import UIKit
