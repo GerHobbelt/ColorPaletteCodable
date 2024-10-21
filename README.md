@@ -63,7 +63,7 @@ Some features :-
 * Multiple named groups of colors within a single palette
 * Colorspace support (RGB, CMYK, Gray) with conversion capabilities
 * Encoding/Decoding of all supported palette coder types
-* Includes a cross-platorm, human readable, palette coder (json utf8 format)
+* Includes a cross-platform, human readable, palette coder (json utf8 format)
 * Integrated pasteboard support for macOS/iOS
 * Simple image generation for an collection of colors
 * Gradient support
@@ -188,7 +188,7 @@ let rawData = try encoder.encode(palette)
 ## Gradients
 
 The library defines `PAL.Gradients` which defines a collection of colors with positions
-that can be used when using a gradient.  Certain gradient types (eg. `.grd`) support multiple 
+that can be used when using a gradient.  Certain gradient types (e.g. `.grd`) support multiple 
 gradients within the same file.
 
 ## Gradient API
@@ -215,7 +215,7 @@ gradients within the same file.
 * `.grd` support is _very_ basic at this point. There's no formal document for it, and I built this using very 
 vague documents [1](http://www.selapa.net/swatches/gradients/fileformats.php), [2]()
   * doesn't (currently) support encode
-  * Only user colors are supported in the gradients (ie. book colors aren't supported)
+  * Only user colors are supported in the gradients (i.e. book colors aren't supported)
   * Noise gradients aren't supported
   * only rgb, cmyk, hsb, gray colors are supported
 * `.pspgradient` _appears_ to be equal to the grd v3 format. (Read only)
@@ -225,7 +225,7 @@ For some nice gradient files
 * [cptcity](http://soliton.vm.bytemark.co.uk/pub/cpt-city/index.html) has all of them :-)
 * [lospec](https://lospec.com/palette-list)
 
-cptcity also has a [nice converter](http://soliton.vm.bytemark.co.uk/pub/cptutils-online/select.html) for gradients to ggr
+cptcity also has a [nice converter](http://soliton.vm.bytemark.co.uk/pub/cptutils-online/select.html) for gradients to ggr.
 
 ### Examples
 
