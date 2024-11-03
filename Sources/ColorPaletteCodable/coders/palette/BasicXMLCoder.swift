@@ -105,7 +105,7 @@ extension PAL.Coder.BasicXML: XMLParserDelegate {
 					}
 					return 255
 				}()
-				if let cc = try? PAL.Color(name: name, r: r, g: g, b: b, a: a) {
+				if let cc = try? PAL.Color(name: name, r255: r, g255: g, b255: b, a255: a) {
 					self.palette.colors.append(cc)
 				}
 			}
@@ -135,9 +135,8 @@ extension PAL.Coder.BasicXML {
 			let b = UInt8(try rgb.b() * 255.0)
 			let a = UInt8(rgb.alpha * 255.0)
 
-			if let hex = rgb.rawHexRGBA {
-				xml += "hex=\"\(hex)\" "
-			}
+			let hex = try rgb.hexRGBA(hashmark: false)
+			xml += "hex=\"\(hex)\" "
 
 			xml += "r=\"\(r)\" g=\"\(g)\" b=\"\(b)\" a=\"\(a)\""
 			xml += " />\n"

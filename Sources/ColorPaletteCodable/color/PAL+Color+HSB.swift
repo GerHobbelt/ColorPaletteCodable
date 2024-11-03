@@ -33,12 +33,52 @@ import UIKit
 #endif
 
 public extension PAL.Color {
-	/// Create a color using hsb values
-	init(name: String = "", h: Float32, s: Float32, b: Float32, a: Float32, colorType: PAL.ColorType = .global) throws {
+	/// Create a color using fractional hsb values
+	/// - Parameters:
+	///   - name: The color name
+	///   - h: The hue (0 ... 360)
+	///   - s: Saturation (0.0 ... 100.0)
+	///   - b: Brightness (0.0 ... 100.0)
+	///   - alpha: The alpha component (0.0 ... 1.0)
+	///   - colorType: The color type
+	init(
+		name: String = "",
+		h360: Float32,
+		s100: Float32,
+		b100: Float32,
+		alpha: Float32 = 1.0,
+		colorType: PAL.ColorType = .global
+	) throws {
+		try self.init(
+			name: name,
+			h: h360 / 360.0,
+			s: s100 / 100.0,
+			b: b100 / 100.0,
+			alpha: alpha,
+			colorType: colorType
+		)
+	}
+
+	/// Create a color using fractional hsb values
+	/// - Parameters:
+	///   - name: The color name
+	///   - h: The hue (0.0 ... 1.0)      / 0 ... 360 /
+	///   - s: Saturation (0.0 ... 1.0)   / 0 ... 100 /
+	///   - b: Brightness (0.0 ... 1.0)   / 0 ... 100 /
+	///   - alpha: The alpha component (0.0 ... 1.0)
+	///   - colorType: The color type
+	init(
+		name: String = "",
+		h: Float32,
+		s: Float32,
+		b: Float32,
+		alpha: Float32 = 1.0,
+		colorType: PAL.ColorType = .global
+	) throws {
 		let h = CGFloat(h.clamped(to: 0...1))
 		let s = CGFloat(s.clamped(to: 0...1))
 		let b = CGFloat(b.clamped(to: 0...1))
-		let a = CGFloat(a.clamped(to: 0...1))
+		let a = CGFloat(alpha.clamped(to: 0...1))
 #if os(macOS)
 		// Use AppKit
 		let c = NSColor(calibratedHue: h, saturation: s, brightness: b, alpha: a).cgColor
@@ -60,6 +100,48 @@ public extension PAL.Color {
 			colorType: colorType
 		)
 #endif
+	}
+
+	/// Create a color from HSB values
+	/// - Parameters:
+	///   - name: The color name
+	///   - h360: The hue (0.0 ... 360.0)   /0 ... 360/
+	///   - s100: Saturation (0.0 ... 100.0)
+	///   - b100: Brightness (0.0 ... 100.0)
+	///   - alpha: The alpha component (0.0 ... 1.0)
+	///   - colorType: The type of color
+	/// - Returns: A new color
+	static func hsb360(
+		name: String = "",
+		_ h360: Float32,
+		_ s100: Float32,
+		_ b100: Float32,
+		_ alpha: Float32 = 1.0,
+		colorType: PAL.ColorType = .global
+	) -> PAL.Color {
+		// We know that the color has the correct components here
+		PAL.Color.hsb(name: name, h360 / 360.0, s100 / 100.0, b100 / 100.0, alpha, colorType: colorType)
+	}
+
+	/// Create a color from fractional HSB values
+	/// - Parameters:
+	///   - name: The color name
+	///   - h: The hue (0.0 ... 1.0)      / 0 ... 360 /
+	///   - s: Saturation (0.0 ... 1.0)   / 0 ... 100 /
+	///   - b: Brightness (0.0 ... 1.0)   / 0 ... 100 /
+	///   - alpha: The alpha component (0.0 ... 1.0)
+	///   - colorType: The type of color
+	/// - Returns: A new color
+	static func hsb(
+		name: String = "",
+		_ h: Float32,
+		_ s: Float32,
+		_ b: Float32,
+		_ alpha: Float32 = 1.0,
+		colorType: PAL.ColorType = .global
+	) -> PAL.Color {
+		// We know that the color has the correct components here
+		try! PAL.Color(h: h, s: s, b: b, alpha: alpha)
 	}
 }
 
