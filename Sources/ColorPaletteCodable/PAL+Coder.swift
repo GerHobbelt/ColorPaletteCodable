@@ -49,9 +49,10 @@ public extension PAL.Palette {
 			PAL.Coder.PaintNET(),
 			PAL.Coder.SVG(),
 			PAL.Coder.CorelPainter(),
+			PAL.Coder.AndroidColorsXML(),
 		]
 #if canImport(CoreGraphics)
-		coders.append(PAL.Coder.PNG())
+		coders.append(PAL.Coder.Image())
 #endif
 
 		return coders
@@ -71,6 +72,7 @@ public extension PAL.Palette {
 		PAL.Coder.HEX(),
 		PAL.Coder.PaintNET(),
 		PAL.Coder.CorelPainter(),
+		PAL.Coder.AndroidColorsXML(),
 	]
 }
 
@@ -170,7 +172,7 @@ public extension PAL.Palette {
 //	}
 }
 
-#if !os(Linux)
+#if !os(Linux) && !os(Windows)
 
 import UniformTypeIdentifiers
 

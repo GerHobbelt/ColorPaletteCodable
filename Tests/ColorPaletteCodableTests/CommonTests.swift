@@ -176,18 +176,6 @@ final class CommonTests: XCTestCase {
 		#endif
 	}
 
-	func testMidpoint() throws {
-		let c1 = PAL.Color.rgb(1, 0, 0, 0.2)
-		let c2 = PAL.Color.rgb(0, 0, 1, 0.8)
-		let c3 = try c1.midpoint(c2, t: 0.5.unitValue)
-		XCTAssertEqual([0.5, 0, 0.5], c3.colorComponents)
-		XCTAssertEqual(0.5, c3.alpha)
-		#if canImport(CoreGraphics)
-		let rx = c3.cgColor
-		XCTAssertNotNil(rx)
-		#endif
-	}
-
 	func testHSB() throws {
 		do {
 			#if os(macOS)

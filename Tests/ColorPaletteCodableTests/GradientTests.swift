@@ -216,7 +216,7 @@ class GradientTests: XCTestCase {
 				]
 			)
 
-			#if !os(Linux)
+			#if !os(Linux) && !os(Windows)
 			let imOrig = try XCTUnwrap(gradient.image(size: CGSize(width: 400, height: 200)))
 			let d1 = try imOrig.representation.png()
 			try outputFolder.write(d1, to: "textGradient1_original.png")
@@ -225,7 +225,7 @@ class GradientTests: XCTestCase {
 			let flattened = try gradient.mergeTransparencyStops()
 			XCTAssertNil(flattened.transparencyStops)
 
-			#if !os(Linux)
+			#if !os(Linux) && !os(Windows)
 			let imFlattened = try XCTUnwrap(flattened.image(size: CGSize(width: 400, height: 200)))
 			let d2 = try imFlattened.representation.png()
 			try outputFolder.write(d2, to: "textGradient1_flattened.png")
@@ -239,7 +239,7 @@ class GradientTests: XCTestCase {
 			let first = gradients.gradients[0]
 			XCTAssertNotNil(first.transparencyStops)
 
-			#if !os(Linux)
+			#if !os(Linux) && !os(Windows)
 			let imOrig = try XCTUnwrap(first.image(size: CGSize(width: 400, height: 200)))
 			let d1 = try imOrig.representation.png()
 			try outputFolder.write(d1, to: "35_1_orig.png")
@@ -249,7 +249,7 @@ class GradientTests: XCTestCase {
 			XCTAssertNil(flattened.transparencyStops)
 			XCTAssertEqual(8, flattened.stops.count)
 
-			#if !os(Linux)
+			#if !os(Linux) && !os(Windows)
 			let imFlattened = try XCTUnwrap(flattened.image(size: CGSize(width: 400, height: 200)))
 			let d2 = try imFlattened.representation.png()
 			try outputFolder.write(d2, to: "35_1_flattened.png")
@@ -265,7 +265,7 @@ class GradientTests: XCTestCase {
 			XCTAssertNotNil(first.transparencyStops)
 			XCTAssertEqual(9, first.transparencyStops?.count)
 
-			#if !os(Linux)
+			#if !os(Linux) && !os(Windows)
 			let imOrig = try XCTUnwrap(first.image(size: CGSize(width: 400, height: 200)))
 			let d1 = try imOrig.representation.png()
 			try outputFolder.write(d1, to: "30_1_orig.png")
@@ -275,11 +275,26 @@ class GradientTests: XCTestCase {
 			XCTAssertNil(flattened.transparencyStops)
 			XCTAssertEqual(10, flattened.stops.count)
 
-			#if !os(Linux)
+			#if !os(Linux) && !os(Windows)
 			let imFlattened = try XCTUnwrap(flattened.image(size: CGSize(width: 400, height: 200)))
 			let d2 = try imFlattened.representation.png()
 			try outputFolder.write(d2, to: "30_1_flattened.png")
 			#endif
 		}
+	}
+
+	func testGradientCreationFromArray() throws {
+		let colors: [PAL.Color] = [
+			try PAL.Color(name: "r", r255: 255, g255: 0, b255: 0),
+			try PAL.Color(name: "g", r255: 0, g255: 255, b255: 0),
+			try PAL.Color(name: "b", r255: 0, g255: 0, b255: 255),
+		]
+		let g = colors.gradient()
+		XCTAssertNil(g.name)
+		XCTAssertEqual([0, 0.5, 1], g.stops.map { $0.position })
+		XCTAssertEqual(colors, g.stops.map { $0.color })
+
+		let g1 = colors.gradient(named: "g")
+		XCTAssertEqual("g", g1.name)
 	}
 }

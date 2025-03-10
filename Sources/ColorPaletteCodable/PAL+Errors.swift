@@ -48,6 +48,7 @@ public extension PAL {
 		case unsupportedCGColorType
 		case invalidRGBHexString(String)
 		case invalidRGBAHexString(String)
+		case invalidARGBHexString(String)
 		case unsupportedColorSpace
 		case invalidVersion
 		case invalidBOM
@@ -61,5 +62,6 @@ public extension PAL {
 		case notEnoughColorsToGenerateGradient
 		case cannotGenerateGradient
 		case cannotCreateColor
+		case tooFewColors
 	}
 }

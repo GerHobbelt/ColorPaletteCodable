@@ -109,7 +109,7 @@ func withTemporaryFile<ReturnType>(_ fileExtension: String? = nil, _ block: (URL
 
 func withDataWrittenToTemporaryFile<T>(_ data: Data, fileExtension: String? = nil, _ block: (URL) throws -> T?) throws -> T? {
 	return try withTemporaryFile(fileExtension, { tempURL in
-		#if os(Linux)
+		#if os(Linux) || os(Windows)
 		try data.write(to: tempURL)
 		#else
 		try data.write(to: tempURL, options: .atomicWrite)
@@ -139,5 +139,18 @@ extension Data {
 #else
 		return nil
 #endif
+	}
+}
+
+extension BinaryFloatingPoint {
+	/// An equality check with a precision accuracy
+	/// - Parameters:
+	///   - value: The value to compare
+	///   - precision: The precision (accuracy) in decimal places (eg. 8 == 8 decimal places)
+	/// - Returns: True if mostly equal, false otherwise
+	func isEqual(to value: Self, precision: UInt) -> Bool {
+		let s = abs(self - value)
+		let p = Self(pow(10, -Double(precision)))
+		return s < p
 	}
 }
